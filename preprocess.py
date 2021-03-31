@@ -14,18 +14,18 @@ modalities = ('flair', 't1ce', 't1', 't2')
 
 
 train_set = {
-        'root': '/mip/Data/BraTS2018/Train',
-        'flist': 'all.txt',
+        'root': ('/media/ee/DATA/Datasets/Brain/BraTS2020_Training_TrainValSplit/Training', True),
+        'flist': 'train.txt',
         }
 
 valid_set = {
-        'root': '/mip/Data/BraTS2018/Valid',
+        'root': ('/media/ee/DATA/Datasets/Brain/BraTS2020_Training_TrainValSplit/Validation', True),
         'flist': 'valid.txt',
         }
 
 test_set = {
-        'root': '/mip/Data/BraTS2018/Test',
-        'flist': 'test.txt',
+        'root': ('/media/ee/DATA/Datasets/Brain/BraTS2020_Training_TrainValSplit/Validation_online', False),
+        'flist': 'valid_online.txt',
         }
 
 def nib_load(file_name):
