@@ -1,4 +1,4 @@
-train_data_dir: /mip/Data/BraTS2018/Train
-valid_data_dir: /mip/Data/BraTS2018/Valid
-#test_data_dir: /mip/Data/BraTS2018/Test
+train_data_dir: /media/ee/DATA/Datasets/Brain/BraTS2020_Training_TrainValSplit/Training
+valid_data_dir: /media/ee/DATA/Datasets/Brain/BraTS2020_Training_TrainValSplit/Validation
+test_data_dir: /media/ee/DATA/Datasets/Brain/BraTS2020_Training_TrainValSplit/Validation_online
 ckpt_dir: ./ckpts
