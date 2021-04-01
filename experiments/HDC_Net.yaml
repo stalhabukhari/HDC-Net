@@ -24,12 +24,13 @@ opt_params:
 
 workers: 10
 
-train_list: all.txt
+train_list: train.txt
 valid_list: valid.txt
+test_list: valid_online.txt
 train_transforms: # for training
   Compose([
     RandCrop3D((128,128,128)),
-    RandomRotion(10), 
+    RandomRotion(10),
     RandomIntensityChange((0.1,0.1)),
     RandomFlip(0),
     NumpyType((np.float32, np.int64)),

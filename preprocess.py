@@ -67,10 +67,10 @@ def process_f32(path):
     for k in range(4):
         x = images[..., k] #
         y = x[mask] #
-        
+
         lower = np.percentile(y, 0.2) # 算分位数
         upper = np.percentile(y, 99.8)
-        
+
         x[mask & (x < lower)] = lower
         x[mask & (x > upper)] = upper
 
@@ -96,6 +96,4 @@ def doit(dset):
 
 doit(train_set)
 doit(valid_set)
-# doit(test_set)
-
-
+doit(test_set)

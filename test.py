@@ -100,7 +100,7 @@ def main():
         raise ValueError
 
     Dataset = getattr(datasets, args.dataset) #
-    valid_list = os.path.join(root_path, args.valid_list)
+    valid_list = os.path.join(root_path, args.test_list)
     valid_set = Dataset(valid_list, root=root_path,for_train=False, transforms=args.test_transforms)
 
     valid_loader = DataLoader(
@@ -138,4 +138,8 @@ def main():
 
 
 if __name__ == '__main__':
+    """
+    e.g.
+    python test.py --mode=2 --is_out=True --verbose=True --use_TTA=False --postprocess=True --snapshot=True --restore=model_last.pth --cfg=HDC_Net --gpu=0
+    """
     main()
