@@ -95,7 +95,7 @@ def validate_softmax(
 
         if postprocess == True:
             ET_voxels = (output == 3).sum()
-            if ET_voxels < 500:
+            if 0 < ET_voxels < 500:
                 output[np.where(output == 3)] = 1
 
         msg = 'Subject {}/{}, '.format(i+1, len(valid_loader))
