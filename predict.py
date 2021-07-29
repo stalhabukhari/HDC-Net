@@ -52,9 +52,18 @@ def validate_softmax(
         save_format=None, # ['nii','npy'], use 'nii' as default. Its purpose is for submission.
         snapshot=False, # for visualization. Default false. It is recommended to generate the visualized figures.
         postprocess=False, # Defualt False, when use postprocess, the score of dice_ET would be changed.
-        cpu_only=False):
+        cpu_only=False,
+        datapath=None):
 
     assert cfg is not None
+    if datapath is not None: # hack for loading affine matrix (to save segmentation)
+        def load_affine(p):
+            flairpath = os.path.join(datapath, p, p+'_flair.nii.gz')
+            assert os.path.isfile(flairpath), "[Error]: `*_flair.nii.gz` file missing"
+            image = nib.load(flairpath)
+            image.uncache()
+            return image.affine
+
     H, W, T = 240, 240, 155
     model.eval()
     runtimes = []
@@ -123,7 +132,12 @@ def validate_softmax(
                 if verbose:
                     print('1:',np.sum(seg_img==1),' | 2:',np.sum(seg_img==2),' | 4:',np.sum(seg_img==4))
                     print('WT:',np.sum((seg_img==1)|(seg_img==2)|(seg_img==4)),' | TC:',np.sum((seg_img==1)|(seg_img==4)),' | ET:',np.sum(seg_img==4))
-                nib.save(nib.Nifti1Image(seg_img, None),oname)
+                if datapath is None:
+                    print('[Warning] Attempting to save segmentation without affine matrix (unavailable)')
+                    affine = None
+                else:
+                    affine = load_affine(name)
+                nib.save(nib.Nifti1Image(seg_img, affine),oname)
 
                 if snapshot:
                     """ --- grey figure---"""

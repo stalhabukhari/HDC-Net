@@ -134,7 +134,8 @@ def main():
             use_TTA=args.use_TTA,
             snapshot=args.snapshot,
             postprocess=args.postprocess,
-            cpu_only=False)
+            cpu_only=False,
+            datapath=valid_set.root)
 
 
 if __name__ == '__main__':
